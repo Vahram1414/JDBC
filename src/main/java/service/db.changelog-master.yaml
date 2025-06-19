@@ -1,0 +1,8 @@
+databaseChangelog:
+  - include:
+      file: db/changelog/changeset/create-lable-table.yaml
+  - include:
+      file: db/changelog/changeset/create-writer-table.yaml
+  - include:
+      file: db/changelog/changeset/create-post-table.yaml
+
