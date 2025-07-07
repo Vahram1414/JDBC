@@ -14,7 +14,8 @@ public class LabelView {
     public void createLabel() {
         System.out.println("Enter name label");
         String name = scanner.nextLine();
-        Label l = controller.createLabel(name);
+        Label createdLabel = controller.createLabel(name);
+        System.out.println("Created label: " + createdLabel);
     }
 
     public void updateLabel() {
@@ -41,7 +42,7 @@ public class LabelView {
         System.out.println("Enter id Label");
         Integer id = scanner.nextInt();
         System.out.println("Delete label with id: "
-            + controller.getById(id).getId()
-            + " and name: " + controller.getById(id).getName());
+                + controller.getById(id).getId()
+                + " and name: " + controller.getById(id).getName());
     }
 }

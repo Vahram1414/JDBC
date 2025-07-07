@@ -3,8 +3,6 @@ package utils;
 import java.io.IOException;
 import java.util.Properties;
 
-import static sun.awt.FontConfiguration.loadProperties;
-
 public final class PropertiesUtil {
 
     private static final Properties PROPERTIES = new Properties();
@@ -27,4 +25,4 @@ public final class PropertiesUtil {
             throw new RuntimeException();
         }
     }
- }
+}

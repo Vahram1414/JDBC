@@ -93,11 +93,11 @@ public class JdbcLabelRepositoryImpl implements LabelRepository {
         }
     }
 
-//    private Integer generateNewId(List<Label> labels) {
-//        Label labelWithMaxId = (Label)labels.stream().max(Comparator.comparing(Label::getId)).orElse((Label)null);
-//        Objects.nonNull(labelWithMaxId);
-//        return Objects.nonNull(labelWithMaxId) ? (labelWithMaxId.getId()) + 1 : 1;
-//    }
+    private Integer generateNewId(List<Label> labels) {
+        Label labelWithMaxId = (Label)labels.stream().max(Comparator.comparing(Label::getId)).orElse((Label)null);
+        Objects.nonNull(labelWithMaxId);
+        return Objects.nonNull(labelWithMaxId) ? (labelWithMaxId.getId()) + 1 : 1;
+    }
 
     private Label convertResultSetToLabel(ResultSet resultSet) {
         Label label = null;

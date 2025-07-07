@@ -3,13 +3,12 @@ package utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class JDBCUtils {
-    static final String DATABASE_URL_KEY = "db_database_url";
+    static final String DATABASE_URL_KEY = "db.url";
 
     static final String USER_KEY = "db.user";
-    static final String PASSQORD_KEY = "db.password";
+    static final String PASSWORD_KEY = "db.password";
 
     public static Connection getConnectJDBC() {
 
@@ -25,7 +24,7 @@ public class JDBCUtils {
             connection = DriverManager.getConnection(
                     PropertiesUtil.get(DATABASE_URL_KEY),
                     PropertiesUtil.get(USER_KEY),
-                    PropertiesUtil.get(PASSQORD_KEY)
+                    PropertiesUtil.get(PASSWORD_KEY)
             );
             System.out.println("Creating Database connection...");
         } catch (SQLException e) {
