@@ -5,26 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c021dfe-bceb-4103-9b19-141dec7f81e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/changeset/V1__CREATE_INIT_TABLES_19062025" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db.changelog-master.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/dbschema/changeLog.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/dbschema/changeSet.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/dbschema/liquibase.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/dbschema/master.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/liquibase.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/00001_create_label.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/master.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/liquibase.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/Impl/JdbcLabelRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/Impl/JdbcLabelRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/Impl/JdbcWriterRepositoryImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/changeset/create-lable-table.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/changeset/create-post-table.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/db.changelog-master.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/JDBCUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/JDBCUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/PropertiesUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/PropertiesUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/LabelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LabelView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/WriterView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dbschema/changeLog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dbschema/changeLog.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,13 +112,22 @@
       <option name="project" value="LOCAL" />
       <updated>1750326647903</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="7 july">
+      <option name="closed" value="true" />
+      <created>1751881594977</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1751881594977</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1 May" />
     <MESSAGE value="1 May (2)" />
     <MESSAGE value="19 june" />
-    <option name="LAST_COMMIT_MESSAGE" value="19 june" />
+    <MESSAGE value="7 july" />
+    <option name="LAST_COMMIT_MESSAGE" value="7 july" />
   </component>
 </project>
