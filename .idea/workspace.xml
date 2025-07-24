@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c021dfe-bceb-4103-9b19-141dec7f81e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/00001_create_label.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/master.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/liquibase.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dbschema/changeLog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dbschema/changeLog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/00001_create_label.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/00001_create_label.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/master.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/master.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +36,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Моя практика/JDBC_CRUD3&quot;
+    &quot;last_opened_file_path&quot;: &quot;D:/JDBC2&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -120,7 +117,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751881594977</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="14 july">
+      <option name="closed" value="true" />
+      <created>1752514835043</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1752514835043</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -128,6 +133,7 @@
     <MESSAGE value="1 May (2)" />
     <MESSAGE value="19 june" />
     <MESSAGE value="7 july" />
-    <option name="LAST_COMMIT_MESSAGE" value="7 july" />
+    <MESSAGE value="14 july" />
+    <option name="LAST_COMMIT_MESSAGE" value="14 july" />
   </component>
 </project>
