@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c021dfe-bceb-4103-9b19-141dec7f81e8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/Impl/JdbcWriterRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/00004_create_postLabels.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/2_create_writer.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.changelog-master.yaml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/00001_create_label.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/00001_create_label.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/db/master.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/master.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dbschema/changeLog.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dbschema/changeSet.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/00003_create_posts.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dbschema/liquibase.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dbschema/master.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/liquibase.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/liquibase.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752514835043</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="24 july">
+      <option name="closed" value="true" />
+      <created>1753376457201</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1753376457201</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -134,6 +151,7 @@
     <MESSAGE value="19 june" />
     <MESSAGE value="7 july" />
     <MESSAGE value="14 july" />
-    <option name="LAST_COMMIT_MESSAGE" value="14 july" />
+    <MESSAGE value="24 july" />
+    <option name="LAST_COMMIT_MESSAGE" value="24 july" />
   </component>
 </project>

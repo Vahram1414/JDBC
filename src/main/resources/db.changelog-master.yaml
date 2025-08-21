@@ -1,3 +1,0 @@
-databaseChangelog:
-  - include:
-      file: changeset/V1__CREATE_INIT_TABLES_19062025.sql
