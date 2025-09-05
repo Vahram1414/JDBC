@@ -14,7 +14,7 @@ public class JDBCUtils {
 
         System.out.println("Registering JDBC driver...");
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver...");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
