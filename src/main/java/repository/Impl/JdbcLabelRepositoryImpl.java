@@ -17,9 +17,9 @@ public class JdbcLabelRepositoryImpl implements LabelRepository {
 
     private List<Label> labelList = new ArrayList<>();
 
-    private final static String GET_LABEL_BY_ID_QUERY = "SELECT * FROM WHERE label_id = ?";
+    private final static String GET_LABEL_BY_ID_QUERY = "SELECT * FROM label WHERE label_id = ?";
     private final static String GET_LABEL_ALL = "SELECT * FROM label";
-    private final static String LABEL_SAVE = "INSERT INTO label(writer_id, label_name VALUES (?, ?)";
+    private final static String LABEL_SAVE = "INSERT INTO label(label_id, label_name VALUES (?, ?)";
     private final static String LABEL_UPDATE = "UPDATE labelset label_name = ? where label_id = ?";
     private final static String DELETE_BY_ID = "DELETE FROM label where label_id = ?";
 
