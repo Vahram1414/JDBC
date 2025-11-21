@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c021dfe-bceb-4103-9b19-141dec7f81e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/repository/Impl/JDBCPostRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/repository/PostRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/Impl/JdbcWriterRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/Impl/JdbcLabelRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/Impl/JdbcLabelRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/Impl/GenericRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/Impl/GenericRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/Impl/JDBCPostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/Impl/JDBCPostRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758119155196</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="31 October">
+      <option name="closed" value="true" />
+      <created>1761899409058</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1761899409058</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -182,7 +189,8 @@
     <MESSAGE value="5 September" />
     <MESSAGE value="5 September ver 2" />
     <MESSAGE value="17 September" />
-    <option name="LAST_COMMIT_MESSAGE" value="17 September" />
+    <MESSAGE value="31 October" />
+    <option name="LAST_COMMIT_MESSAGE" value="31 October" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
