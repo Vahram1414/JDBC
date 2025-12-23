@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c021dfe-bceb-4103-9b19-141dec7f81e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/repository/Impl/JdbcWriterRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/PostController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/Impl/JdbcPostRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/PostView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/Impl/GenericRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/Impl/GenericRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/Impl/JDBCPostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/Impl/JDBCPostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LabelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LabelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/Impl/JDBCPostRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/LabelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LabelView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761899409058</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="21 November">
+      <option name="closed" value="true" />
+      <created>1763715683065</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1763715683065</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -190,15 +202,21 @@
     <MESSAGE value="5 September ver 2" />
     <MESSAGE value="17 September" />
     <MESSAGE value="31 October" />
-    <option name="LAST_COMMIT_MESSAGE" value="31 October" />
+    <MESSAGE value="21 November" />
+    <option name="LAST_COMMIT_MESSAGE" value="21 November" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/utils/JDBCUtils.java</url>
-          <line>34</line>
+          <url>file://$PROJECT_DIR$/src/main/java/repository/Impl/JdbcPostRepositoryImpl.java</url>
+          <line>46</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/repository/Impl/JdbcPostRepositoryImpl.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

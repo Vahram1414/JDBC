@@ -7,15 +7,28 @@ import utils.JDBCUtils;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JdbcPostRepository implements PostRepository {
+public class JdbcPostRepositoryImpl implements PostRepository {
 
     private List<Post> postList = new ArrayList<>();
 
-    private final static String GET_POST_BY_ID = "SELECT * FROM post WHERE post_id = ?";
+    private final static String GET_POST_BY_ID = "SELECT " +
+            "    p.id AS post_id," +
+            "    p.content," +
+            "    p.created," +
+            "    p.updated," +
+            "    l.id AS label_id," +
+            "    l.name AS label_name " +
+            "FROM " +
+            "    Posts p " +
+            "LEFT JOIN " +
+            "  post_labels pl ON p.id = pl.post_id " +
+            "LEFT JOIN " +
+            "    Label l ON pl.label_id = l.id " +
+            "WHERE " +
+            "    p.id = ?";
     private final static String GET_POST_ALL_QUERY2 = "SELECT p.id AS post_id, p.content AS post_content, p.created AS post_created, p.updated \n" +
             "AS post_updated, l.id AS label_id, l.name AS label_name FROM posts p LEFT JOIN post_labels pl \n" +
             "ON p.id = pl.post_id LEFT JOIN label l\n" +
@@ -29,8 +42,9 @@ public class JdbcPostRepository implements PostRepository {
 
     @Override
     public Post getById(Integer integer) {
-        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(GET_POST_BY_ID)
-        ) {
+        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(GET_POST_BY_ID)) {
+            preparedStatement.setInt(1, integer);
+            ResultSet resultSet = preparedStatement.executeQuery();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -39,8 +53,8 @@ public class JdbcPostRepository implements PostRepository {
 
     @Override
     public List<Post> getAll() throws SQLException {
-        try (Statement statement = JDBCUtils.getConnectJDBC().createStatement()) {
-            ResultSet resultSet = statement.executeQuery(GET_POST_ALL_QUERY2);
+        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(GET_POST_ALL_QUERY2)) {
+            ResultSet resultSet = preparedStatement.executeQuery(GET_POST_ALL_QUERY2);
             while (resultSet.next()) {
 
                 Post post = new Post();
@@ -52,10 +66,8 @@ public class JdbcPostRepository implements PostRepository {
 
                 postList.add(post);
 
-                List<String> labelList = new ArrayList<>();
-
-                labelList.add(resultSet.getString("post_id"));
-                labelList.add(resultSet.getString("post_name"));
+                List<Integer> labelList = new ArrayList<>();
+                labelList.add(resultSet.getInt("label_id"));
 
                 System.out.println("PostId: " + post.getId());
                 System.out.println("PostContent: " + post.getContent());

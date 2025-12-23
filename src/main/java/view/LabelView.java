@@ -27,7 +27,7 @@ public class LabelView {
         System.out.println("You have entered: " + l);
     }
 
-    public void getAll() {
+    public void getAll() throws SQLException {
         List<Label> l = controller.getAll();
     }
 

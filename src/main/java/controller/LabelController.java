@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class LabelController {
+
     private final LabelRepository repo;
 
     public LabelController() {
@@ -31,7 +32,7 @@ public class LabelController {
         return repo.update(label);
     }
 
-    public List<Label> getAll() {
+    public List<Label> getAll() throws SQLException {
         return repo.getAll();
     }
 
