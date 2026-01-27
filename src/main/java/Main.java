@@ -10,5 +10,6 @@ public class Main {
         labelView.createLabel();
         PostView postView = new PostView();
         postView.getById();
+        postView.getAll();
     }
 }

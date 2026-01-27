@@ -1,5 +1,6 @@
 package repository.Impl;
 
+import model.Label;
 import model.Post;
 import repository.PostRepository;
 import utils.JDBCUtils;
@@ -9,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+//import static utils.JDBCUtils.connection;
 
 public class JdbcPostRepositoryImpl implements PostRepository {
 
@@ -28,7 +31,7 @@ public class JdbcPostRepositoryImpl implements PostRepository {
             "LEFT JOIN " +
             "    Label l ON pl.label_id = l.id " +
             "WHERE " +
-            "    p.id = ?";
+            "p.id = ?";
     private final static String GET_POST_ALL_QUERY2 = "SELECT p.id AS post_id, p.content AS post_content, p.created AS post_created, p.updated \n" +
             "AS post_updated, l.id AS label_id, l.name AS label_name FROM posts p LEFT JOIN post_labels pl \n" +
             "ON p.id = pl.post_id LEFT JOIN label l\n" +
@@ -42,14 +45,87 @@ public class JdbcPostRepositoryImpl implements PostRepository {
 
     @Override
     public Post getById(Integer integer) {
+
         try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(GET_POST_BY_ID)) {
+
             preparedStatement.setInt(1, integer);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = null;
+
+            resultSet = preparedStatement.executeQuery();
+            while (true) {
+                try {
+                    if (!resultSet.next()) break;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                Post post = new Post();
+                List<Label> labelList = new ArrayList<>();
+
+                {
+                    post = new Post();
+                    try {
+                        post.setId(resultSet.getInt("post_id"));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        post.setContent(resultSet.getString("content"));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        post.setCreated(resultSet.getString("created"));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        post.setUpdated(resultSet.getString("updated"));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    int labelId = 0;
+                    try {
+                        labelId = resultSet.getInt("label_id");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        if (!resultSet.wasNull()) {
+                            Label label = new Label();
+                            label.setId(labelId);
+                            label.setName(resultSet.getString("label_name"));
+                            labelList.add(label);
+
+
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return null;
     }
+
+
+//        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(GET_POST_BY_ID)) {
+//            preparedStatement.setInt(1, integer);
+//            ResultSet resultSet = preparedStatement.executeQuery(GET_POST_BY_ID);
+//            while (resultSet.next()) {
+//
+//                Post post = new Post();
+//
+//
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return null;
+//    }
 
     @Override
     public List<Post> getAll() throws SQLException {
@@ -79,18 +155,18 @@ public class JdbcPostRepositoryImpl implements PostRepository {
         return null;
     }
 
-        @Override
-        public Post save(Post post) {
-            try(PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(POST_SAVE)) {
+    @Override
+    public Post save(Post post) {
+        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(POST_SAVE)) {
 
-                preparedStatement.setString(2, post.getContent());
-                preparedStatement.setString(3, post.getCreated());
-                preparedStatement.setString(4, post.getUpdated());
-            } catch (SQLException e) {
-                System.out.println("IN save exception: " + e.getMessage());
-            }
-            return null;
+            preparedStatement.setString(2, post.getContent());
+            preparedStatement.setString(3, post.getCreated());
+            preparedStatement.setString(4, post.getUpdated());
+        } catch (SQLException e) {
+            System.out.println("IN save exception: " + e.getMessage());
         }
+        return null;
+    }
 
 
     @Override
@@ -103,6 +179,6 @@ public class JdbcPostRepositoryImpl implements PostRepository {
     @Override
     public void deleteById(Integer integer) {
 
-        }
+    }
 }
 
