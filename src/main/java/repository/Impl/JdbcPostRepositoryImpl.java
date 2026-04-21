@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //import static utils.JDBCUtils.connection;
 
@@ -47,7 +49,7 @@ public class JdbcPostRepositoryImpl implements PostRepository {
     public Post getById(Integer integer) {
 
         try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(GET_POST_BY_ID)) {
-
+            Post post = new Post();
             preparedStatement.setInt(1, integer);
             ResultSet resultSet = null;
 
@@ -59,11 +61,10 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                     throw new RuntimeException(e);
                 }
 
-                Post post = new Post();
                 List<Label> labelList = new ArrayList<>();
 
                 {
-                    post = new Post();
+                    post = new Post(); // дичь
                     try {
                         post.setId(resultSet.getInt("post_id"));
                     } catch (SQLException e) {
@@ -104,28 +105,13 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                         throw new RuntimeException(e);
                     }
                 }
+                post.setLabels(labelList);
             }
+            return post;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return null;
         }
-        return null;
     }
-
-
-//        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(GET_POST_BY_ID)) {
-//            preparedStatement.setInt(1, integer);
-//            ResultSet resultSet = preparedStatement.executeQuery(GET_POST_BY_ID);
-//            while (resultSet.next()) {
-//
-//                Post post = new Post();
-//
-//
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return null;
-//    }
 
     @Override
     public List<Post> getAll() throws SQLException {

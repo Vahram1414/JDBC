@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException {
         LabelView labelView = new LabelView();
-        labelView.createLabel();
+//        labelView.createLabel();
         PostView postView = new PostView();
+//        postView.createPost();
         postView.getById();
-        postView.getAll();
     }
 }

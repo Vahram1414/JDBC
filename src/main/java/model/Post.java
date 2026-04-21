@@ -1,10 +1,22 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Post {
     private Integer id;
     private String content;
     private String created;
     private String updated;
+    private List<Label> labels;
+
+    public List<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<Label> labels) {
+        this.labels = labels;
+    }
 
     public Integer getId() {
         return id;
@@ -45,6 +57,7 @@ public class Post {
                 ", content='" + content + '\'' +
                 ", created='" + created + '\'' +
                 ", updated='" + updated + '\'' +
+                ", labels=" + labels +
                 '}';
     }
 }
