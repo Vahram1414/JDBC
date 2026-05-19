@@ -52,7 +52,7 @@ public class JdbcPostRepositoryImpl implements PostRepository {
             Post post = new Post();
             preparedStatement.setInt(1, integer);
             ResultSet resultSet = null;
-
+            List<Label> labels = new ArrayList<>();
             resultSet = preparedStatement.executeQuery();
             while (true) {
                 try {
@@ -61,10 +61,7 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                     throw new RuntimeException(e);
                 }
 
-                List<Label> labelList = new ArrayList<>();
-
                 {
-                    post = new Post(); // дичь
                     try {
                         post.setId(resultSet.getInt("post_id"));
                     } catch (SQLException e) {
@@ -97,7 +94,7 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                             Label label = new Label();
                             label.setId(labelId);
                             label.setName(resultSet.getString("label_name"));
-                            labelList.add(label);
+                            labels.add(label);
 
 
                         }
@@ -105,7 +102,7 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                         throw new RuntimeException(e);
                     }
                 }
-                post.setLabels(labelList);
+                post.setLabels(labels);
             }
             return post;
         } catch (SQLException e) {

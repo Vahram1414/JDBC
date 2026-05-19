@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         LabelView labelView = new LabelView();
 //        labelView.createLabel();
+//        labelView.getAll();
         PostView postView = new PostView();
 //        postView.createPost();
         postView.getById();

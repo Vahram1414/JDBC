@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class JdbcLabelRepositoryImpl implements LabelRepository {
 
-    private List<Label> labelList = new ArrayList<>();
+    private List<Label> labels = new ArrayList<>(); //заменил labelList на labels
 
     private final static String GET_LABEL_BY_ID_QUERY = "SELECT * FROM label WHERE label_id = ?";
     private final static String GET_LABEL_ALL = "SELECT * FROM label";
@@ -46,7 +46,7 @@ public class JdbcLabelRepositoryImpl implements LabelRepository {
                 label.setId((resultSet.getInt("writer_id")));
                 label.setName(resultSet.getString("label_name"));
 
-                labelList.add(label);
+                labels.add(label); //заменил labelList на labels
 
                 System.out.println("LabelId: " + label.getId());
                 System.out.println("LabelName: " + label.getName());
@@ -55,13 +55,13 @@ public class JdbcLabelRepositoryImpl implements LabelRepository {
         } catch (SQLException e) {
             System.out.println("IN getAll exception: " + e.getMessage());
         }
-        return labelList;
+        return labels; //заменил labelList на labels
     }
 
     public Label save(Label label) {
         try(PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(LABEL_SAVE)) {
 
-            preparedStatement.setInt(1, generateNewId(labelList));
+            preparedStatement.setInt(1, generateNewId(labels)); //заменил labelList на labels
             preparedStatement.setString(2, label.getName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
