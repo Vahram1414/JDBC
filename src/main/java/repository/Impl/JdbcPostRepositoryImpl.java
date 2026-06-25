@@ -34,9 +34,9 @@ public class JdbcPostRepositoryImpl implements PostRepository {
             "    Label l ON pl.label_id = l.id " +
             "WHERE " +
             "p.id = ?";
-    private final static String GET_POST_ALL_QUERY2 = "SELECT p.id AS post_id, p.content AS post_content, p.created AS post_created, p.updated \n" +
-            "AS post_updated, l.id AS label_id, l.name AS label_name FROM posts p LEFT JOIN post_labels pl \n" +
-            "ON p.id = pl.post_id LEFT JOIN label l\n" +
+    private final static String GET_POST_ALL_QUERY2 = "SELECT p.id AS post_id, p.content AS post_content, p.created AS post_created, p.updated " +
+            "AS post_updated, l.id AS label_id, l.name AS label_name FROM posts p LEFT JOIN post_labels pl " +
+            "ON p.id = pl.post_id LEFT JOIN label l " +
             "ON pl.label_id = l.id";
 
     private final static String GET_POST_ALL = "SELECT * FROM post";
@@ -112,30 +112,39 @@ public class JdbcPostRepositoryImpl implements PostRepository {
 
     @Override
     public List<Post> getAll() throws SQLException {
-        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(GET_POST_ALL_QUERY2)) {
-            ResultSet resultSet = preparedStatement.executeQuery(GET_POST_ALL_QUERY2);
+        List<Post> posts = new ArrayList<>();
+        String sql = GET_POST_ALL_QUERY2; // исправил с LEFT JOIN labels на label 12 июня 26г
+
+        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(sql)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            Map<Integer, Post> postMap = new HashMap<>();
             while (resultSet.next()) {
+                int postId = resultSet.getInt("post_id");
+                Post post = postMap.get(postId);
+                if (post == null) {
+                    post = new Post();
+                    post.setId(postId);
+                    post.setContent(resultSet.getString("content"));
+                    post.setCreated(resultSet.getString("created"));
+                    post.setUpdated(resultSet.getString("updated"));
+                    post.setLabels(new ArrayList<>());
+                    postMap.put(postId, post);
+                    posts.add(post);
+                }
 
-                Post post = new Post();
-
-                post.setId(resultSet.getInt("post_id"));
-                post.setContent((resultSet.getString("post_content")));
-                post.setCreated((resultSet.getString("post_created")));
-                post.setUpdated((resultSet.getString("post_updated")));
-
-                postList.add(post);
-
-                List<Integer> labelList = new ArrayList<>();
-                labelList.add(resultSet.getInt("label_id"));
-
-                System.out.println("PostId: " + post.getId());
-                System.out.println("PostContent: " + post.getContent());
-                System.out.println("PostCreated: " + post.getCreated());
-                System.out.println("PostUpdated: " + post.getUpdated());
-                System.out.println("=======================================================");
+                int labelId = resultSet.getInt("l.id");
+                if (!resultSet.wasNull()) {
+                    Label label = new Label();
+                    label.setId(labelId);
+                    label.setName(resultSet.getString("l.name"));
+                    post.getLabels().add(label);
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
+        return posts;
     }
 
     @Override

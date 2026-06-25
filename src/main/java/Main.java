@@ -11,6 +11,7 @@ public class Main {
 //        labelView.getAll();
         PostView postView = new PostView();
 //        postView.createPost();
-        postView.getById();
+//        postView.getById();
+        postView.getAll();
     }
 }
