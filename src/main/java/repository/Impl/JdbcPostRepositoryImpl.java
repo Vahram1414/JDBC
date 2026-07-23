@@ -39,11 +39,9 @@ public class JdbcPostRepositoryImpl implements PostRepository {
             "ON p.id = pl.post_id LEFT JOIN label l " +
             "ON pl.label_id = l.id";
 
-    private final static String GET_POST_ALL = "SELECT * FROM post";
     private final static String POST_SAVE = "INSERT INTO post(post_id, post_content, post_created, post_updated, List<Label> labels VALUES (?, ?, ?, ?)";
-    private final static String POST_UPDATE = "UPDATE postset post_id = ?, where post_content = ?, where post_created = ?, where post_updated = ?";
+    private final static String POST_UPDATE = "UPDATE post set post_id = ?, where post_content = ?, where post_created = ?, where post_updated = ?";
     private final static String DELETE_BY_ID = "DELETE FROM post where post_id = ?";
-    private final static String LIST_LABEL = "SELECT * FROM post_labels where post_id = ? OR label_id = ?";
 
     @Override
     public Post getById(Integer integer) {
@@ -125,19 +123,19 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                 if (post == null) {
                     post = new Post();
                     post.setId(postId);
-                    post.setContent(resultSet.getString("content"));
-                    post.setCreated(resultSet.getString("created"));
-                    post.setUpdated(resultSet.getString("updated"));
+                    post.setContent(resultSet.getString("post_content"));
+                    post.setCreated(resultSet.getString("post_created"));
+                    post.setUpdated(resultSet.getString("post_updated"));
                     post.setLabels(new ArrayList<>());
                     postMap.put(postId, post);
                     posts.add(post);
                 }
 
-                int labelId = resultSet.getInt("l.id");
+                int labelId = resultSet.getInt("label_id");
                 if (!resultSet.wasNull()) {
                     Label label = new Label();
                     label.setId(labelId);
-                    label.setName(resultSet.getString("l.name"));
+                    label.setName(resultSet.getString("label_name"));
                     post.getLabels().add(label);
                 }
             }
