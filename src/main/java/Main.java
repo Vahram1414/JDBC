@@ -12,6 +12,9 @@ public class Main {
         PostView postView = new PostView();
 //        postView.createPost();
 //        postView.getById();
-        postView.getAll();
+//        postView.getAll();
+        postView.createPost();
+        postView.updatePost();
+        postView.deleteByIdPost();
     }
 }

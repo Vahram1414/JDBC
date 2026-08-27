@@ -16,14 +16,14 @@ public class PostView {
     public void createPost() {
         System.out.println("Enter content post");
         String content = scanner.nextLine();
-        Post createdPost = controller.createPost(content);
+        Post createContent = controller.createPost(content);
         System.out.println("Enter created post");
-//        String created = scanner.nextLine();
-//        Post createdPost = controller.createPost(created);
-//        System.out.println("Enter updated post");
-//        String updated = scanner.nextLine();
-//        Post createdPost = controller.createPost(updated);
-//        System.out.println("Created label: " + createdLabel);
+        String created = scanner.nextLine();
+        Post createdPost = controller.createPost(created);
+        System.out.println("Enter updated post");
+        String updated = scanner.nextLine();
+        Post updatedPost = controller.createPost(updated);
+        System.out.println("Created Post: " + createdPost);
     }
 
     public void updatePost() {

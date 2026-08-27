@@ -8,10 +8,13 @@ import utils.JDBCUtils;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.nio.file.attribute.AclEntryPermission.DELETE;
 
 //import static utils.JDBCUtils.connection;
 
@@ -147,28 +150,54 @@ public class JdbcPostRepositoryImpl implements PostRepository {
 
     @Override
     public Post save(Post post) {
-        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(POST_SAVE)) {
+        String sql = "INSERT INTO post(post_content, post_created, post_updated) VALUES (?, ?, ?)";
+        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, post.getContent());
+            preparedStatement.setString(2, post.getCreated());
+            preparedStatement.setString(3, post.getUpdated());
 
-            preparedStatement.setString(2, post.getContent());
-            preparedStatement.setString(3, post.getCreated());
-            preparedStatement.setString(4, post.getUpdated());
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Создание поста не удалось, ничего не добавлено");
+            }
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    long id = generatedKeys.getLong(1);
+                    post.setId((int) id);
+                }
+            }
+            //TODO: сохранить записи в postLabels
         } catch (SQLException e) {
             System.out.println("IN save exception: " + e.getMessage());
         }
-        return null;
+        return post;
     }
 
 
     @Override
     public Post update(Post post) {
+        String sqlUpdate = "UPDATE post SET post_content = ?, post_updated = ? WHERE post_id = ?";
+        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(sqlUpdate)) {
+            preparedStatement.setString(1, post.getContent());
+            preparedStatement.setString(2, post.getUpdated());
+            preparedStatement.setInt(3, post.getId());
 
-
-        return null;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return post;
     }
 
     @Override
-    public void deleteById(Integer integer) {
-
+    public void deleteById(Integer id) {
+        String sqlDelete = "DELETE FROM post where post_id = ?";
+        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(DELETE_BY_ID)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("IN deleteById exception: " + e.getMessage());
+        }
     }
 }
-
