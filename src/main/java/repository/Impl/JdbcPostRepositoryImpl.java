@@ -37,14 +37,14 @@ public class JdbcPostRepositoryImpl implements PostRepository {
             "    Label l ON pl.label_id = l.id " +
             "WHERE " +
             "p.id = ?";
-    private final static String GET_POST_ALL_QUERY2 = "SELECT p.id AS post_id, p.content AS post_content, p.created AS post_created, p.updated " +
+    private final static String GET_POST_ALL_QUERY2 = "SELECT p.id AS post_id, p.content AS content, p.created AS post_created, p.updated " +
             "AS post_updated, l.id AS label_id, l.name AS label_name FROM posts p LEFT JOIN post_labels pl " +
             "ON p.id = pl.post_id LEFT JOIN label l " +
             "ON pl.label_id = l.id";
 
-    private final static String POST_SAVE = "INSERT INTO post(post_id, post_content, post_created, post_updated, List<Label> labels VALUES (?, ?, ?, ?)";
-    private final static String POST_UPDATE = "UPDATE post set post_id = ?, where post_content = ?, where post_created = ?, where post_updated = ?";
-    private final static String DELETE_BY_ID = "DELETE FROM post where post_id = ?";
+    private final static String POST_SAVE = "INSERT INTO post(post_id, content, post_created, post_updated, List<Label> labels VALUES (?, ?, ?, ?)";
+    private final static String POST_UPDATE = "UPDATE post set post_id = ?, where content = ?, where post_created = ?, where post_updated = ?";
+    private final static String DELETE_BY_ID = "DELETE FROM post_labels where post_id = ?";
 
     @Override
     public Post getById(Integer integer) {
@@ -126,9 +126,9 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                 if (post == null) {
                     post = new Post();
                     post.setId(postId);
-                    post.setContent(resultSet.getString("post_content"));
-                    post.setCreated(resultSet.getString("post_created"));
-                    post.setUpdated(resultSet.getString("post_updated"));
+                    post.setContent(resultSet.getString("content"));
+                    post.setCreated(resultSet.getString("created"));
+                    post.setUpdated(resultSet.getString("updated"));
                     post.setLabels(new ArrayList<>());
                     postMap.put(postId, post);
                     posts.add(post);
@@ -150,54 +150,98 @@ public class JdbcPostRepositoryImpl implements PostRepository {
 
     @Override
     public Post save(Post post) {
-        String sql = "INSERT INTO post(post_content, post_created, post_updated) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO post(content, created, updated) VALUES (?, ?, ?)";
         try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, post.getContent());
             preparedStatement.setString(2, post.getCreated());
             preparedStatement.setString(3, post.getUpdated());
 
             int affectedRows = preparedStatement.executeUpdate();
-
             if (affectedRows == 0) {
-                throw new SQLException("Создание поста не удалось, ничего не добавлено");
+                throw new SQLException("Создать пост не удалось");
             }
 
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    long id = generatedKeys.getLong(1);
-                    post.setId((int) id);
+                    int id = generatedKeys.getInt(1);
+                    post.setId(id);
                 }
             }
-            //TODO: сохранить записи в postLabels
+
+            if (post.getLabels() != null && !post.getLabels().isEmpty()) {
+                String sqlInsertPostLabel = "INSERT INTO post_labels (post_id, label_id) VALUES (?, ?)";
+                try (PreparedStatement psLabel = JDBCUtils.getConnectJDBC().prepareStatement(sqlInsertPostLabel)) {
+                    for (Label label : post.getLabels()) {
+                        if (label != null) {
+                            psLabel.setInt(1, post.getId());
+                            psLabel.setInt(2, label.getId());
+                            psLabel.executeUpdate();
+                        }
+                    }
+                }
+            }
+
         } catch (SQLException e) {
             System.out.println("IN save exception: " + e.getMessage());
         }
         return post;
     }
 
-
     @Override
     public Post update(Post post) {
-        String sqlUpdate = "UPDATE post SET post_content = ?, post_updated = ? WHERE post_id = ?";
+        String sqlUpdate = "UPDATE post SET content = ?, updated = ? WHERE id = ?";
         try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(sqlUpdate)) {
             preparedStatement.setString(1, post.getContent());
             preparedStatement.setString(2, post.getUpdated());
             preparedStatement.setInt(3, post.getId());
 
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                return null;
+            }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+
+        try (PreparedStatement psDelLabels = JDBCUtils.getConnectJDBC().prepareStatement("DELETE FROM post_labels WHERE post_id = ?")) {
+            psDelLabels.setInt(1, post.getId());
+            psDelLabels.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("IN update delete labels exception: " + e.getMessage());
+        }
+
+        if (post.getLabels() != null && !post.getLabels().isEmpty()) {
+            String sqlInsertPostLabel = "INSERT INTO post_labels (post_id, label_id) VALUES (?, ?)";
+            try (PreparedStatement psLabel = JDBCUtils.getConnectJDBC().prepareStatement(sqlInsertPostLabel)) {
+                for (Label label : post.getLabels()) {
+                    if (label != null) {
+                        psLabel.setInt(1, post.getId());
+                        psLabel.setInt(2, label.getId());
+                        psLabel.executeUpdate();
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println("IN update insert labels exception: " + e.getMessage());
+            }
+        }
+
         return post;
     }
 
     @Override
     public void deleteById(Integer id) {
-        String sqlDelete = "DELETE FROM post where post_id = ?";
-        try (PreparedStatement preparedStatement = JDBCUtils.getConnectJDBC().prepareStatement(DELETE_BY_ID)) {
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
+        try (PreparedStatement psDelLabels = JDBCUtils.getConnectJDBC().prepareStatement("DELETE FROM post_labels WHERE post_id = ?")) {
+            psDelLabels.setInt(1, id);
+            psDelLabels.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("IN deleteById exception: " + e.getMessage());
+            System.out.println("IN deleteById delete labels exception: " + e.getMessage());
+        }
+
+        try (PreparedStatement psDelPost = JDBCUtils.getConnectJDBC().prepareStatement("DELETE FROM post WHERE id = ?")) {
+            psDelPost.setInt(1, id);
+            psDelPost.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("IN deleteById delete post exception: " + e.getMessage());
         }
     }
 }
