@@ -65,28 +65,17 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                 {
                     try {
                         post.setId(resultSet.getInt("post_id"));
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    try {
                         post.setContent(resultSet.getString("content"));
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    try {
                         post.setCreated(resultSet.getString("created"));
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    try {
                         post.setUpdated(resultSet.getString("updated"));
+                        int labelId = 0;
+                        labelId = resultSet.getInt("label_id");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
 
-                    int labelId = 0;
                     try {
-                        labelId = resultSet.getInt("label_id");
+
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }

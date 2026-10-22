@@ -239,7 +239,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787839085175</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="17.09.2026">
+      <option name="closed" value="true" />
+      <created>1789653089348</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1789653089348</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -273,7 +281,8 @@
     <MESSAGE value="25.06.2026" />
     <MESSAGE value="23.07.2026" />
     <MESSAGE value="27.08.2026" />
-    <option name="LAST_COMMIT_MESSAGE" value="27.08.2026" />
+    <MESSAGE value="17.09.2026" />
+    <option name="LAST_COMMIT_MESSAGE" value="17.09.2026" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
