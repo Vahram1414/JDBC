@@ -8,6 +8,7 @@ import repository.PostRepository;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class PostController {
 
@@ -24,6 +25,7 @@ public class PostController {
     public Post createPost(String content) {
         Post post = new Post();
         post.setContent(content);
+        //TODO коллекция лейблов
         return repo.save(post);
     }
 
@@ -47,6 +49,11 @@ public class PostController {
     public Post getById(Integer id) {
         return repo.getById(id);
     }
+
+//    public Optional<Post> getById(Integer id) { try { Post p = repo.getById(id);
+//        return Optional.ofNullable(p); }
+//    catch (Exception e) {
+//        return Optional.empty(); } }
 
 
 }

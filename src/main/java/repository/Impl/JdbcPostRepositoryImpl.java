@@ -9,10 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.nio.file.attribute.AclEntryPermission.DELETE;
 
@@ -45,6 +42,7 @@ public class JdbcPostRepositoryImpl implements PostRepository {
     private final static String POST_SAVE = "INSERT INTO post(post_id, content, post_created, post_updated, List<Label> labels VALUES (?, ?, ?, ?)";
     private final static String POST_UPDATE = "UPDATE post set post_id = ?, where content = ?, where post_created = ?, where post_updated = ?";
     private final static String DELETE_BY_ID = "DELETE FROM post_labels where post_id = ?";
+    private Integer labelId;
 
     @Override
     public Post getById(Integer integer) {
@@ -73,20 +71,13 @@ public class JdbcPostRepositoryImpl implements PostRepository {
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
-
-                    try {
-
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+                    
                     try {
                         if (!resultSet.wasNull()) {
                             Label label = new Label();
                             label.setId(labelId);
                             label.setName(resultSet.getString("label_name"));
                             labels.add(label);
-
-
                         }
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
